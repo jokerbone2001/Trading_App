@@ -2,15 +2,15 @@ package com.example.myapplication;
 
 public class UserClass {
     private String name,loginID,password,email;
-    private int userID;
+    private int uniqueID;
 
     //default constructor
     public UserClass() {
     }
 
     //overloaded constructor
-    public UserClass(int userID, String name,String loginID,String password,String email ) {
-        this.userID = userID;
+    public UserClass(int uniqueID, String name,String loginID,String password,String email ) {
+        this.uniqueID = uniqueID;
         this.name = name;
         this.loginID=loginID;
         this.password=password;
@@ -35,16 +35,16 @@ public class UserClass {
         this.name = name;
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
+    public void setUserID(int uniqueID) {
+        this.uniqueID = uniqueID;
     }
 
     public String getName() {
         return name;
     }
 
-    public int getUserID() {
-        return userID;
+    public int getUniqueID() {
+        return uniqueID;
     }
 
     public String getLoginID() {
