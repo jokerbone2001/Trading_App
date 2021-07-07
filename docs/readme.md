@@ -42,7 +42,7 @@ String passwordTxt = findViewById(R.id.eTextPass);
 String abc = userPassword;
 ```
 **Also to follow camel case.**
-```java
+``` Java
 //Good 
 String goodCamelCasing;
 
