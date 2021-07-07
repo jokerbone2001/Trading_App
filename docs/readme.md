@@ -11,7 +11,6 @@ Our intention is to follow good code conventions so each of our group members ca
       - [Documentation](#documentation)
 * [References](#references)
 ## Coding Style
-***
 #### Formatting
 
 1. We try not to exceed the 100 column limit but it rarely happens such as when accessing SQLite functions which usually exceeds the limit.
@@ -81,7 +80,6 @@ public class UserClass{
 }
 ```
 ## References
-***
 - Oracle. "Coding Conventions for Java TM Programming Language"
 https://www.oracle.com/java/technologies/javase/codeconventions-contents.html (accessed July 6,2021).
 - Google. "Google Java Style Guide"
