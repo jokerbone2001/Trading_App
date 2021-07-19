@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
-        <activity android:name=".HomePage"></activity>
+        <activity android:name=".PostRequest"></activity>
+        <activity android:name=".RequestPage" />
+        <activity android:name=".HomePage" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

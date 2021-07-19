@@ -1,0 +1,109 @@
+package com.example.myapplication;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+import androidx.annotation.Nullable;
+
+import java.lang.ref.ReferenceQueue;
+import java.util.ArrayList;
+import java.util.List;
+
+public class DBRequestHelper extends SQLiteOpenHelper {
+    //This is the helper class for the "user" database table
+    //.. final/constants names for easy access of SQL table and columns
+
+    private SQLiteDatabase db;
+
+    public static final String REQUEST_TABLE = "REQUEST_TABLE";
+    public static final String COL_UNIQUEID = "UNIQUEID";
+    public static final String COL_NAME = "NAME";
+    public static final String COL_DESCRIPTION = "DESCRIPTION";
+    public static final String COL_Contact_Info="Contact_Info";
+    public static final String COL_UserId="UserId";
+
+    public DBRequestHelper(Context context){
+        super(context,"user.db",null,1);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db){
+
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    }
+
+        public boolean add(RequestClass requestClass){
+        //function to add new users
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        //Think ContentValues as a HashMap to load Strings, ints, and etc. into one Object
+        cv.put(COL_NAME,requestClass.getName());
+        cv.put(COL_DESCRIPTION,requestClass.getDescription());
+        cv.put(COL_Contact_Info,requestClass.getContact_info());
+        cv.put(COL_UserId,requestClass.getUserid());
+
+        //insert the ContentValues (cv) into USER_TABLE (user.db)
+        long insert = db.insert(REQUEST_TABLE, null, cv);
+
+        if(insert == -1){
+            //-1 failed to add data
+            return false;
+        }else{
+            //otherwise successful
+            return true;
+        }
+    }
+    public List<RequestClass> getRequestInfo(){
+        List<RequestClass> infoList = new ArrayList<>();
+        //"SELECT * FROM " - translate into select everything from "Database table name"
+        String queryString = "SELECT * FROM "+REQUEST_TABLE;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor=db.rawQuery(queryString,null);
+        if(cursor.moveToFirst()){
+            do{
+                String uniqueID = cursor.getString(0);
+                String name = cursor.getString(1);
+                String description = cursor.getString(2);
+                String contact_info = cursor.getString(3);
+                String uid = cursor.getString(4);
+                RequestClass newRequest = new RequestClass(Integer.parseInt(uniqueID),name,description,contact_info,uid);
+
+                infoList.add(newRequest); //loads all info from User Database into a List
+
+            }while(cursor.moveToNext());
+        }else{
+
+        }
+        cursor.close(); //remember to close the Cursor
+        db.close();  // and the DB
+        return infoList; //returns the List to where ever this function is called
+
+    }
+
+    public RequestClass getLastRequest(){
+        RequestClass data = new RequestClass();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor=db.query(REQUEST_TABLE,null,null,null,null,null,COL_UNIQUEID+" desc","1");
+        if(cursor.moveToNext()){
+            data.setId(Integer.parseInt(cursor.getString(0)));
+            data.setName(cursor.getString(1));
+            data.setDescription(cursor.getString(2));
+            data.setContact_info(cursor.getString(3));
+            data.setUserid(cursor.getString(4));
+        }
+        return data;
+    }
+
+    public boolean deleteRequest(String id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.delete(REQUEST_TABLE,COL_UNIQUEID+"=?",new String[]{id})>0;
+    }
+}

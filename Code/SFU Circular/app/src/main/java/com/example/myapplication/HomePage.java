@@ -13,12 +13,15 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener{
     TextView infoTxt;
     Button logoutBtn;
     String currUniqueID,currLoginID,currName,currEmail;
+    Button requestBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
         infoTxt=findViewById(R.id.displayInfoTxt);
         logoutBtn=findViewById(R.id.logoutBtn);
+        requestBtn = findViewById(R.id.Request);
+        requestBtn.setOnClickListener(this);
 
         /*
         getIntent().getStringExtra("key")
@@ -44,6 +47,10 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener{
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent); //goes back to Login/register page (MainActivity)
                 Toast.makeText(HomePage.this,"Logging out...",Toast.LENGTH_SHORT).show(); //pops a help msg for users
+                break;
+            case R.id.Request:
+                Intent intent1 = new Intent(HomePage.this,RequestPage.class);
+                startActivity(intent1);
                 break;
         }
     }
