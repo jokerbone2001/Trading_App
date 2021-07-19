@@ -46,13 +46,6 @@ public class DBUserHelper extends SQLiteOpenHelper {
                 + COL_EMAIL + " TEXT)";                                     //email column
         db.execSQL(createTableStatement);
 
-        String createTableStatement1= "CREATE TABLE " + REQUEST_TABLE +
-                " (" + COL_REQUEST_UNIQUEID + " INTEGER PRIMARY KEY AUTOINCREMENT, "  //unique ID column
-                + COL_REQUEST_NAME + " TEXT, "                                       //Name Column
-                + COL_DESCRIPTION + " TEXT, "                                   //login ID column
-                + COL_Contact_Info + " TEXT, "                                  //password column
-                + COL_UserId + " TEXT)";                                     //email column
-        db.execSQL(createTableStatement1);
     }
 
     @Override

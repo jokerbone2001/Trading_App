@@ -26,12 +26,18 @@ public class DBRequestHelper extends SQLiteOpenHelper {
     public static final String COL_UserId="UserId";
 
     public DBRequestHelper(Context context){
-        super(context,"user.db",null,1);
+        super(context,"request.db",null,1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db){
-
+        String createTableStatement1= "CREATE TABLE " + REQUEST_TABLE +
+                " (" + COL_UNIQUEID + " INTEGER PRIMARY KEY AUTOINCREMENT, "  //unique ID column
+                + COL_NAME + " TEXT, "                                       //Name Column
+                + COL_DESCRIPTION + " TEXT, "                                   //login ID column
+                + COL_Contact_Info + " TEXT, "                                  //password column
+                + COL_UserId + " TEXT)";                                     //email column
+        db.execSQL(createTableStatement1);
     }
 
     @Override
