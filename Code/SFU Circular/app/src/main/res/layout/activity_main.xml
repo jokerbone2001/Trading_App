@@ -73,6 +73,21 @@
         app:layout_constraintTop_toBottomOf="@+id/btnLogin"
         tools:visibility="visible" />
 
+    <TextView
+        android:id="@+id/viewForgotPass"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="64dp"
+        android:onClick="onClick"
+        android:text="Forgot password? Click here."
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewRegisterTxt"
+        tools:visibility="visible" />
+
     <Button
         android:id="@+id/btnRegister"
         android:layout_width="0dp"
@@ -85,9 +100,9 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editEmailTxt"
+        app:layout_constraintTop_toBottomOf="@+id/editSecurityA"
         app:layout_constraintVertical_bias="0.0"
         tools:visibility="gone" />
 
@@ -106,10 +121,10 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.416"
+        app:layout_constraintVertical_bias="0.281"
         tools:visibility="gone" />
 
     <EditText
@@ -193,6 +208,169 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnRegister"
+        tools:visibility="gone" />
+
+    <EditText
+        android:id="@+id/editSecurityQ"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="64dp"
+        android:ems="10"
+        android:hint="Security Question"
+        android:inputType="textPersonName"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editEmailTxt"
+        tools:visibility="gone" />
+
+    <EditText
+        android:id="@+id/editSecurityA"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="64dp"
+        android:ems="10"
+        android:hint="Security Answer"
+        android:inputType="textPersonName"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editSecurityQ"
+        tools:visibility="gone" />
+
+    <EditText
+        android:id="@+id/forgotId"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="8dp"
+        android:ems="10"
+        android:hint="ID"
+        android:inputType="textPersonName"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/forgotEmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="gone" />
+
+    <EditText
+        android:id="@+id/forgotEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="8dp"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/btnForgot"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="gone" />
+
+    <Button
+        android:id="@+id/btnForgot"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="32dp"
+        android:onClick="onClick"
+        android:text="Next"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.667"
+        tools:visibility="gone" />
+
+    <TextView
+        android:id="@+id/txtQuestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="8dp"
+        android:hint="Security Question: "
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/forgotAnswer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="gone" />
+
+    <EditText
+        android:id="@+id/forgotAnswer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="8dp"
+        android:ems="10"
+        android:hint="Your answer here."
+        android:inputType="textPersonName"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/btnForgot"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="gone" />
+
+    <EditText
+        android:id="@+id/forgotPass"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="8dp"
+        android:ems="10"
+        android:hint="New Password"
+        android:inputType="textPassword"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/forgotPassConfirm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="gone" />
+
+    <EditText
+        android:id="@+id/forgotPassConfirm"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="8dp"
+        android:ems="10"
+        android:hint="New Password Confirmation"
+        android:inputType="textPassword"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/btnForgot"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="gone" />
+
+    <TextView
+        android:id="@+id/btnForgotBack"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="64dp"
+        android:hint="Click here to go back to login."
+        android:onClick="onClick"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnForgot"
         tools:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

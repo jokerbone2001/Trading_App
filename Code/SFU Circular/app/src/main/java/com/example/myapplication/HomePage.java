@@ -12,7 +12,7 @@ import android.widget.Toast;
 public class HomePage extends AppCompatActivity implements View.OnClickListener{
     TextView infoTxt;
     Button logoutBtn;
-    String currUniqueID,currLoginID,currName,currEmail;
+    String currUniqueID,currLoginID,currName,currEmail,currQuestion,currAnswer;
     Button requestBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +31,14 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener{
         currLoginID=getIntent().getStringExtra("LOGINID");
         currName=getIntent().getStringExtra("NAME");
         currEmail=getIntent().getStringExtra("EMAIL");
-
+        currQuestion = getIntent().getStringExtra("QUESTION");
+        currAnswer = getIntent().getStringExtra("ANSWER");
         infoTxt.setText("Unique ID: "+currUniqueID
                 +"\nLogin ID: "+currLoginID
                 +"\nName: "+currName
-                +"\nEmail: "+currEmail);
+                +"\nEmail: "+currEmail
+                +"\nSecurity Question: "+currQuestion
+                +"\nSecurity Answer: "+currAnswer);
     }
 
     @Override

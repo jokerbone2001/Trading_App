@@ -1,7 +1,7 @@
 package com.example.myapplication;
 
 public class UserClass {
-    private String name,loginID,password,email;
+    private String name,loginID,password,email,securityQ,securityA;
     private int uniqueID;
 
     //default constructor
@@ -9,13 +9,14 @@ public class UserClass {
     }
 
     //overloaded constructor
-    public UserClass(int uniqueID, String name,String loginID,String password,String email ) {
+    public UserClass(int uniqueID, String name,String loginID,String password,String email,String securityQ,String securityA) {
         this.uniqueID = uniqueID;
         this.name = name;
         this.loginID=loginID;
         this.password=password;
         this.email=email;
-
+        this.securityQ=securityQ;
+        this.securityA=securityA;
     }
 
     //setters and getters
@@ -39,6 +40,14 @@ public class UserClass {
         this.uniqueID = uniqueID;
     }
 
+    public void setSecurityQ(String securityQ) {
+        this.securityQ = securityQ;
+    }
+
+    public void setSecurityA(String securityA) {
+        this.securityA = securityA;
+    }
+
     public String getName() {
         return name;
     }
@@ -57,5 +66,13 @@ public class UserClass {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getSecurityQ() {
+        return securityQ;
+    }
+
+    public String getSecurityA() {
+        return securityA;
     }
 }
