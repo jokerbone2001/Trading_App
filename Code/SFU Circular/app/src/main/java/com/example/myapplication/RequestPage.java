@@ -3,7 +3,6 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -24,7 +23,7 @@ public class RequestPage extends AppCompatActivity implements RequestAdapter.Inn
 
         dbRequestHelper = new DBRequestHelper(RequestPage.this);
 
-        ListView listview=findViewById(R.id.listview);
+        ListView listview=findViewById(R.id.requestListView);
         requestClassList = dbRequestHelper.getRequestInfo();
 
         adapter = new RequestAdapter(this, requestClassList);

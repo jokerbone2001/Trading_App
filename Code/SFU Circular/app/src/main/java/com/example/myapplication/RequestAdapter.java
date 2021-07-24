@@ -43,19 +43,27 @@ public class RequestAdapter extends BaseAdapter implements View.OnClickListener 
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
         View view;
         LayoutInflater inflater = LayoutInflater.from(context);
         view = inflater.inflate(R.layout.request_list_item, null);
+
         RequestClass requestClass = (RequestClass)getItem(position);
+
         TextView tv_name = view.findViewById(R.id.tv_name);
         tv_name.setText("Item name:"+requestClass.getName());
+
         TextView tv_desc = view.findViewById(R.id.tv_desc);
         tv_desc.setText(requestClass.getDescription());
+
         TextView tv_contact = view.findViewById(R.id.tv_contact);
         tv_contact.setText(requestClass.getContact_info());
+
         Button delBtn = view.findViewById(R.id.delBtn);
         SharedPreferences sp = context.getSharedPreferences("loginInfo",MODE_PRIVATE);
+
         int loginuserid = sp.getInt("userid",0);
+
         if(loginuserid==Integer.parseInt(requestClass.getUserid())){
             delBtn.setVisibility(View.VISIBLE);
         }else{

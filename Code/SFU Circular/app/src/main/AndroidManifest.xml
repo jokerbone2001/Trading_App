@@ -9,10 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
-        <activity android:name=".PostRequest"></activity>
-        <activity android:name=".RequestPage" />
-        <activity android:name=".HomePage" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".ListingListItem" android:label="Add Listing"></activity>
+        <activity android:name=".PostListing" android:label="Post Listing"/>
+        <activity android:name=".ListingPage" android:label="Listings"/>
+        <activity android:name=".PostRequest" android:label="Post Request"/>
+        <activity android:name=".RequestPage" android:label="Requests"/>
+        <activity android:name=".HomePage" android:label="Home"/>
+        <activity android:name=".MainActivity" android:label="SFU Circular">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

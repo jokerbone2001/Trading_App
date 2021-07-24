@@ -11,17 +11,22 @@ import android.widget.Toast;
 
 public class HomePage extends AppCompatActivity implements View.OnClickListener{
     TextView infoTxt;
-    Button logoutBtn;
+    Button logoutBtn, requestBtn, listingBtn;
     String currUniqueID,currLoginID,currName,currEmail,currQuestion,currAnswer;
-    Button requestBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
         infoTxt=findViewById(R.id.displayInfoTxt);
         logoutBtn=findViewById(R.id.logoutBtn);
+
         requestBtn = findViewById(R.id.Request);
         requestBtn.setOnClickListener(this);
+
+        listingBtn = findViewById(R.id.btn_post_listing);
+        listingBtn.setOnClickListener(this);
 
         /*
         getIntent().getStringExtra("key")
@@ -54,6 +59,9 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener{
             case R.id.Request:
                 Intent intent1 = new Intent(HomePage.this,RequestPage.class);
                 startActivity(intent1);
+                break;
+            case R.id.btn_post_listing:
+                startActivity(new Intent(HomePage.this, ListingPage.class));
                 break;
         }
     }
