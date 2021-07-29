@@ -5,9 +5,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 import androidx.annotation.Nullable;
 
+import java.io.ByteArrayOutputStream;
 import java.lang.ref.ReferenceQueue;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +27,10 @@ public class DBRequestHelper extends SQLiteOpenHelper {
     public static final String COL_DESCRIPTION = "DESCRIPTION";
     public static final String COL_Contact_Info = "Contact_Info";
     public static final String COL_UserId = "UserId";
+    public static final String COL_IMAGE = "IMAGE";
+
+    public ByteArrayOutputStream imgOutStream;
+    public byte[] imgInByte;
 
     public DBRequestHelper(Context context) {
         super(context, "request.db", null, 1);
@@ -36,7 +43,8 @@ public class DBRequestHelper extends SQLiteOpenHelper {
                 + COL_NAME + " TEXT, "                                       //Name Column
                 + COL_DESCRIPTION + " TEXT, "                                   //login ID column
                 + COL_Contact_Info + " TEXT, "                                  //password column
-                + COL_UserId + " TEXT)";                                     //email column
+                + COL_UserId + " TEXT, "                                     //email column
+                + COL_IMAGE + " BLOB)";                                     //Image col
         db.execSQL(createTableStatement1);
     }
 
@@ -49,11 +57,18 @@ public class DBRequestHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
+        Bitmap imageBitmap = requestClass.getImage();
+        imgOutStream = new ByteArrayOutputStream();
+        imageBitmap.compress(Bitmap.CompressFormat.JPEG,100,imgOutStream);
+        imgInByte = imgOutStream.toByteArray();
+
         //Think ContentValues as a HashMap to load Strings, ints, and etc. into one Object
+
         cv.put(COL_NAME, requestClass.getName());
         cv.put(COL_DESCRIPTION, requestClass.getDescription());
         cv.put(COL_Contact_Info, requestClass.getContact_info());
         cv.put(COL_UserId, requestClass.getUserid());
+        cv.put(COL_IMAGE,imgInByte);
 
         //insert the ContentValues (cv) into USER_TABLE (user.db)
         long insert = db.insert(REQUEST_TABLE, null, cv);
@@ -81,7 +96,10 @@ public class DBRequestHelper extends SQLiteOpenHelper {
                 String description = cursor.getString(2);
                 String contact_info = cursor.getString(3);
                 String uid = cursor.getString(4);
-                RequestClass newRequest = new RequestClass(Integer.parseInt(uniqueID),name,description,contact_info,uid);
+                byte[] imgByte = cursor.getBlob(5);
+                //convert byte[] to Bitmap
+                Bitmap toBitmap = BitmapFactory.decodeByteArray(imgByte,0,imgByte.length);
+                RequestClass newRequest = new RequestClass(Integer.parseInt(uniqueID),name,description,contact_info,uid,toBitmap);
 
                 infoList.add(newRequest); //loads all info from User Database into a List
 

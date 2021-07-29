@@ -9,6 +9,7 @@ import java.util.List;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -51,16 +52,19 @@ public class RequestAdapter extends BaseAdapter implements View.OnClickListener 
         RequestClass requestClass = (RequestClass)getItem(position);
 
         TextView tv_name = view.findViewById(R.id.tv_name);
-        tv_name.setText("Item name:"+requestClass.getName());
+        tv_name.setText("Item name: "+requestClass.getName());
 
         TextView tv_desc = view.findViewById(R.id.tv_desc);
-        tv_desc.setText(requestClass.getDescription());
+        tv_desc.setText("Description: "+requestClass.getDescription());
 
         TextView tv_contact = view.findViewById(R.id.tv_contact);
-        tv_contact.setText(requestClass.getContact_info());
+        tv_contact.setText("Contact Info: "+requestClass.getContact_info());
 
         Button delBtn = view.findViewById(R.id.delBtn);
         SharedPreferences sp = context.getSharedPreferences("loginInfo",MODE_PRIVATE);
+
+        ImageView tv_image = view.findViewById(R.id.tv_image);
+        tv_image.setImageBitmap(requestClass.getImage());
 
         int loginuserid = sp.getInt("userid",0);
 

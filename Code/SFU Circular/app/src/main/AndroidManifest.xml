@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.myapplication">
 
+    <uses-permission android:name="android.permission.CAMERA"></uses-permission>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,9 +13,7 @@
         android:theme="@style/Theme.MyApplication">
         <activity android:name=".ListingListItem" android:label="Add Listing"></activity>
         <activity android:name=".PostListing" android:label="Post Listing"/>
-        <activity android:name=".ListingPage" android:label="Listings"/>
         <activity android:name=".PostRequest" android:label="Post Request"/>
-        <activity android:name=".RequestPage" android:label="Requests"/>
         <activity android:name=".HomePage" android:label="Home"/>
         <activity android:name=".MainActivity" android:label="SFU Circular">
             <intent-filter>

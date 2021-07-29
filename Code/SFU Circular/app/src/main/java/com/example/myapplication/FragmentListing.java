@@ -1,49 +1,53 @@
 package com.example.myapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import static android.app.Activity.RESULT_OK;
 
-public class ListingPage extends AppCompatActivity implements ListingAdapter.InnerItemOnclickListener {
-
+public class FragmentListing extends Fragment implements ListingAdapter.InnerItemOnclickListener{
     private DBListingHelper ldb;
     ArrayList<ListingClass> listingList;
     ListingAdapter adapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_listing,container,false);
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_listing_page);
+        ldb = new DBListingHelper(getActivity());
 
-        ldb = new DBListingHelper(ListingPage.this);
-
-        ListView listview = findViewById(R.id.listingListView);
+        ListView listview = view.findViewById(R.id.listingListView);
         listingList = ldb.getListingInfo();
 
-        adapter = new ListingAdapter(this, listingList);
+        adapter = new ListingAdapter(getActivity(), listingList);
         adapter.setOnInnerItemOnClickListener(this);
         listview.setAdapter(adapter);
 
-        Button addBtn = findViewById(R.id.goToPostListing);
+        Button addBtn = view.findViewById(R.id.goToPostListing2);
         addBtn.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
-                startActivityForResult(new Intent(ListingPage.this, PostListing.class), 1000);
+                startActivityForResult(new Intent(getActivity(), PostListing.class), 1000);
             }
         });
+
+        // Inflate the layout for this fragment
+        return view;
     }
 
-    protected void onActivityResult(int listingCode, int resultCode, Intent data) {
+    public void onActivityResult(int listingCode, int resultCode, Intent data) {
         super.onActivityResult(listingCode, resultCode, data);
 
         if (listingCode == 1000 && resultCode == RESULT_OK) {
@@ -61,10 +65,11 @@ public class ListingPage extends AppCompatActivity implements ListingAdapter.Inn
             if (flag) {
                 listingList.remove(position);
                 adapter.notifyDataSetChanged();
-                Toast.makeText(this, "delete success", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "delete success", Toast.LENGTH_SHORT).show();
             }
             else
-                Toast.makeText(this, "delete fail", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "delete fail", Toast.LENGTH_SHORT).show();
         }
     }
 }
+

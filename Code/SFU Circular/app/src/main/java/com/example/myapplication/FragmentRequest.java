@@ -1,46 +1,58 @@
 package com.example.myapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.List;
 
-public class RequestPage extends AppCompatActivity implements RequestAdapter.InnerItemOnclickListener{
+import static android.app.Activity.RESULT_OK;
+
+public class FragmentRequest extends Fragment implements RequestAdapter.InnerItemOnclickListener{
     private DBRequestHelper dbRequestHelper;
     List<RequestClass> requestClassList;
     RequestAdapter adapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_request_page);
 
-        dbRequestHelper = new DBRequestHelper(RequestPage.this);
+    }
 
-        ListView listview=findViewById(R.id.requestListView);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_request,container,false);
+
+        dbRequestHelper = new DBRequestHelper(getActivity());
+        ListView listView = view.findViewById(R.id.requestListView2);
         requestClassList = dbRequestHelper.getRequestInfo();
-
-        adapter = new RequestAdapter(this, requestClassList);
+        adapter = new RequestAdapter(getActivity(),requestClassList);
         adapter.setOnInnerItemOnClickListener(this);
-        listview.setAdapter(adapter);
+        listView.setAdapter(adapter);
 
-        Button addBtn = findViewById(R.id.addBtn);
+        Button addBtn = view.findViewById(R.id.addBtn2);
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                startActivityForResult(new Intent(RequestPage.this,PostRequest.class),1000);
+            public void onClick(View view) {
+                System.out.println("Action: switch to add item");
+                startActivityForResult(new Intent(getActivity(),PostRequest.class),1000);
             }
         });
+        return view;
     }
 
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1000 && resultCode == RESULT_OK) {
             RequestClass lastRequest = dbRequestHelper.getLastRequest();
@@ -59,9 +71,9 @@ public class RequestPage extends AppCompatActivity implements RequestAdapter.Inn
                 if(flag){
                     requestClassList.remove(position);
                     adapter.notifyDataSetChanged();
-                    Toast.makeText(this,"delete success",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),"delete success",Toast.LENGTH_SHORT).show();
                 }else{
-                    Toast.makeText(this,"delete fail",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),"delete fail",Toast.LENGTH_SHORT).show();
                 }
                 break;
         }

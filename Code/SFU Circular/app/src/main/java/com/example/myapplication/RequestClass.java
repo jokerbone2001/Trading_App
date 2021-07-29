@@ -1,22 +1,26 @@
 package com.example.myapplication;
 
+import android.graphics.Bitmap;
+
 public class RequestClass {
     private int id;
     private String name;
     private String description;
     private String contact_info;
     private String userid;
+    private Bitmap image;
 
     public RequestClass(){
 
     }
 
-    public RequestClass(int id,String name,String description,String contact_info,String userid){
+    public RequestClass(int id,String name,String description,String contact_info,String userid,Bitmap image){
         this.id=id;
         this.name = name;
         this.description = description;
         this.contact_info = contact_info;
         this.userid=userid;
+        this.image=image;
     }
 
     public int getId() {
@@ -57,5 +61,13 @@ public class RequestClass {
 
     public void setUserid(String userid) {
         this.userid = userid;
+    }
+
+    public Bitmap getImage() {
+        return image;
+    }
+
+    public void setImage(Bitmap image) {
+        this.image = image;
     }
 }
