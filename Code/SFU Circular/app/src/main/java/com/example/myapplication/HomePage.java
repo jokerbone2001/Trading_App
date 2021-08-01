@@ -64,7 +64,5 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener{
                 transaction.commit();
                 break;
         }
-
-
     }
 }

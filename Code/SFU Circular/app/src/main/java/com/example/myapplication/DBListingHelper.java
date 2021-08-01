@@ -4,9 +4,12 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.*;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 import androidx.annotation.Nullable;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 public class DBListingHelper extends SQLiteOpenHelper {
@@ -17,6 +20,11 @@ public class DBListingHelper extends SQLiteOpenHelper {
     public static final String COL_DESCRIPTION = "DESCRIPTION";
     public static final String COL_PHONE = "PHONE";
     public static final String COL_EMAIL = "EMAIL";
+    public static final String COL_USERID = "UserId";
+    public static final String COL_IMAGE = "IMAGE";
+
+    public ByteArrayOutputStream imgOutStream;
+    public byte[] imgInByte;
 
     public DBListingHelper(@Nullable Context context) {
 
@@ -33,7 +41,9 @@ public class DBListingHelper extends SQLiteOpenHelper {
                 + COL_NAME + " TEXT, "                                          //name column
                 + COL_DESCRIPTION + " TEXT, "                                   //description column
                 + COL_PHONE + " TEXT, "                                         //phone column
-                + COL_EMAIL + " TEXT)";                                         //email column
+                + COL_EMAIL + " TEXT, "                                         //email column
+                + COL_USERID + " TEXT, "                                        //User ID column
+                + COL_IMAGE + " BLOB)";                                         //Image column
 
         //run the above sql query
         db.execSQL(createTableStatement1);
@@ -53,11 +63,18 @@ public class DBListingHelper extends SQLiteOpenHelper {
         SQLiteDatabase ldb = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
+        Bitmap image = listing.getImage();
+        imgOutStream = new ByteArrayOutputStream();
+        image.compress(Bitmap.CompressFormat.JPEG,100,imgOutStream);
+        imgInByte = imgOutStream.toByteArray();
+
         //Think ContentValues as a HashMap to load Strings, ints, and etc. into one Object
         cv.put(COL_NAME, listing.getItemName());
         cv.put(COL_DESCRIPTION, listing.getDescription());
         cv.put(COL_PHONE, listing.getPhone());
         cv.put(COL_EMAIL, listing.getEmail());
+        cv.put(COL_USERID, listing.getId());
+        cv.put(COL_IMAGE,imgInByte);
 
         //return true if insert was successful and false otherwise
         return ldb.insert(LISTING_TABLE, null, cv) != -1;
@@ -83,9 +100,15 @@ public class DBListingHelper extends SQLiteOpenHelper {
                 String description = cursor.getString(2);
                 String phone = cursor.getString(3);
                 String email = cursor.getString(4);
+                String uid = cursor.getString(5);
+                byte[] imgByte = cursor.getBlob(6);
+
+                //convert byte[] to Bitmap type
+                Bitmap image = BitmapFactory.decodeByteArray(imgByte,0,imgByte.length);
 
                 //create a listing to append to the list
-                ListingClass info = new ListingClass(Integer.parseInt(uniqueID),name,description,phone,email);
+                ListingClass info = new ListingClass(Integer.parseInt(uniqueID), name, description, phone, email,
+                        Integer.parseInt(uid),image);
 
                 //add the above created listing to the ArrayList
                 infoList.add(info);
@@ -114,6 +137,7 @@ public class DBListingHelper extends SQLiteOpenHelper {
             lastListing.setDescription(cursor.getString(2));
             lastListing.setPhone(cursor.getString(3));
             lastListing.setEmail(cursor.getString(4));
+            lastListing.setItemId(Integer.parseInt(cursor.getString(5)));
         }
 
         cursor.close();

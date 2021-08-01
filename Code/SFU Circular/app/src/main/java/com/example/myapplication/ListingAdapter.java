@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -61,7 +62,16 @@ public class ListingAdapter extends BaseAdapter implements View.OnClickListener 
         Button delBtn = view.findViewById(R.id.btn_del_listing);
         SharedPreferences sp = context.getSharedPreferences("loginInfo", MODE_PRIVATE);
 
+        ImageView tv_image = view.findViewById(R.id.tv_image_listing);
+        tv_image.setImageBitmap(listing.getImage());
+
         int loginuserid = sp.getInt("userid", 0);
+
+        if(loginuserid == listing.getId())
+            delBtn.setVisibility(View.VISIBLE);
+
+        else
+            delBtn.setVisibility(View.GONE);
 
         delBtn.setTag(position);
         delBtn.setOnClickListener(this);

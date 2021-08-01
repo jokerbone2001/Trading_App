@@ -73,13 +73,9 @@ public class DBRequestHelper extends SQLiteOpenHelper {
         //insert the ContentValues (cv) into USER_TABLE (user.db)
         long insert = db.insert(REQUEST_TABLE, null, cv);
 
-        if (insert == -1) {
-            //-1 failed to add data
-            return false;
-        } else {
-            //otherwise successful
-            return true;
-        }
+        //-1 failed to add data
+        //otherwise successful
+        return insert != -1;
     }
 
     public List<RequestClass> getRequestInfo(){
@@ -104,9 +100,8 @@ public class DBRequestHelper extends SQLiteOpenHelper {
                 infoList.add(newRequest); //loads all info from User Database into a List
 
             }while(cursor.moveToNext());
-        }else{
-
         }
+
         cursor.close(); //remember to close the Cursor
         db.close();  // and the DB
         return infoList; //returns the List to where ever this function is called
@@ -124,6 +119,8 @@ public class DBRequestHelper extends SQLiteOpenHelper {
             data.setContact_info(cursor.getString(3));
             data.setUserid(cursor.getString(4));
         }
+
+        cursor.close();
         return data;
     }
 

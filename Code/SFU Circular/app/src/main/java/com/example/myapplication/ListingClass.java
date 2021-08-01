@@ -1,29 +1,43 @@
 package com.example.myapplication;
 
+import android.graphics.Bitmap;
+
 public class ListingClass {
-    private int id;
+    private int userId;
     private String itemName;
     private String description;
     private String phone;
     private String email;
+    private int itemId;
+    private Bitmap image;
 
     public ListingClass(){
     }
 
-    public ListingClass(int id, String itemName, String description, String phone,String email){
-        this.id = id;
+    public ListingClass(int userId, String itemName, String description, String phone,String email, int itemId, Bitmap image){
+        this.userId = userId;
         this.itemName = itemName;
         this.description = description;
         this.phone = phone;
         this.email = email;
+        this.image = image;
+        this.itemId = itemId;
     }
 
+    /**
+     *
+     * @return User ID
+     */
     public int getId() {
-        return id;
+        return userId;
     }
 
+    /**
+     *
+     * @param id User ID
+     */
     public void setId(int id) {
-        this.id = id;
+        this.userId = id;
     }
 
     public String getItemName() {
@@ -56,5 +70,20 @@ public class ListingClass {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setItemId(int id){ itemId = id;}
+
+    public int getItemId()
+    {
+        return itemId;
+    }
+
+    public Bitmap getImage() {
+        return image;
+    }
+
+    public void setImage(Bitmap image) {
+        this.image = image;
     }
 }

@@ -22,7 +22,6 @@ import android.widget.Toast;
 
 public class PostRequest extends AppCompatActivity {
     private EditText et_name,et_description,et_contactinfo;
-    private Button submitBtn;
     private DBRequestHelper dbRequestHelper;
     private ImageView insertImage;
     private Bitmap imageBitmap;
@@ -48,14 +47,14 @@ public class PostRequest extends AppCompatActivity {
             }
         });
 
-        submitBtn = findViewById(R.id.submitBtn);
+        Button submitBtn = findViewById(R.id.submitBtn);
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String name = et_name.getText().toString();
                 String description = et_description.getText().toString();
                 String contactInfo = et_contactinfo.getText().toString();
-                if(name.equals("")||description.equals("")||contactInfo.equals("")){
+                if(name.equals("")||description.equals("")||contactInfo.equals("")||imageBitmap == null){
                     Toast.makeText(PostRequest.this,"information is empty",Toast.LENGTH_SHORT).show();
                 }else {
                     RequestClass requestClass = new RequestClass();
