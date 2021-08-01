@@ -31,7 +31,7 @@
     <TextView
         android:id="@+id/tv_contact"
         android:layout_width="157dp"
-        android:layout_height="41"
+        android:layout_height="41dp"
         android:hint="PlaceHolder: Contact"
         android:textAlignment="center" />
 
