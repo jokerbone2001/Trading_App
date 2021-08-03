@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:background="@color/black"
         android:gravity="right"
-        android:text="DELETE REQUEST"
+        android:text="DELETE POST"
         android:textAlignment="center"
         android:textColor="@color/white" />
 

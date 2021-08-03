@@ -32,7 +32,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="REQUESTS" />
+            android:text="POSTINGS" />
 
         <Button
             android:id="@+id/btn_post_listing"
