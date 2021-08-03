@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.myapplication">
 
-    <uses-permission android:name="android.permission.CAMERA"></uses-permission>
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -11,11 +11,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
-        <activity android:name=".ListingListItem" android:label="Add Listing"></activity>
-        <activity android:name=".PostListing" android:label="Post Listing"/>
-        <activity android:name=".PostRequest" android:label="Post Request"/>
-        <activity android:name=".HomePage" android:label="Home"/>
-        <activity android:name=".MainActivity" android:label="SFU Circular">
+        <activity android:name=".clickLargeImage"></activity>
+        <activity
+            android:name=".ListingListItem"
+            android:label="Add Listing" />
+        <activity
+            android:name=".PostListing"
+            android:label="Post Listing" />
+        <activity
+            android:name=".PostRequest"
+            android:label="Post Request" />
+        <activity
+            android:name=".HomePage"
+            android:label="Home" />
+        <activity
+            android:name=".MainActivity"
+            android:label="SFU Circular">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

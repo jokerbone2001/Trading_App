@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.widget.BaseAdapter;
@@ -65,7 +66,14 @@ public class RequestAdapter extends BaseAdapter implements View.OnClickListener 
 
         ImageView tv_image = view.findViewById(R.id.tv_image);
         tv_image.setImageBitmap(requestClass.getImage());
-
+        tv_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(view.getContext(),clickLargeImage.class);
+                i.putExtra("image",requestClass.getImage());
+                view.getContext().startActivity(i);
+            }
+        });
         int loginuserid = sp.getInt("userid",0);
 
         if(loginuserid==Integer.parseInt(requestClass.getUserid())){

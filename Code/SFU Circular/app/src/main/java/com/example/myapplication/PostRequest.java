@@ -41,7 +41,6 @@ public class PostRequest extends AppCompatActivity {
         insertImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("TEST");
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent,100);
             }
